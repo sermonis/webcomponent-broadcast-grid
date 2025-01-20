@@ -10,11 +10,21 @@ npm install broadcast-grid
 
 ### Using
 
+***JavaScript***
+```
+import { useGrid } from 'broadcast-grid';
+
+const grid = useGrid();
+
+```
+***HTML***
+
 ```
 <broadcast-grid>
 
 	<broadcast-cell></broadcast-cell>
 	<broadcast-cell></broadcast-cell>
+	...
 	<broadcast-cell></broadcast-cell>
 
 </broadcast-grid>
