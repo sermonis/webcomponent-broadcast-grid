@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + TS</title>
+	<link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body>
+    <script type="module" src="/src/index.ts"></script>
+
+	<div id="app" style="position: relative; height: 100vh">
+
+		<button onclick="addCell()" style="position: fixed; right: 10px; top: 10px;">+</button>
+
+		<broadcast-grid id="grid">
+		
+
+		
+		</broadcast-grid>
+
+	</div>
+
+	<script>
+
+		function addCell () {
+
+			const cell = document.createElement( 'broadcast-cell' );
+
+			const grid = document.getElementById( 'grid' );
+
+			grid.appendChild( cell );
+
+		}
+
+	</script>
+
+  </body>
+</html>

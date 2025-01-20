@@ -1,0 +1,15 @@
+.broadcast-grid {
+
+	height: 100%;
+	width: 100%;
+
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	flex-wrap: wrap;
+
+	gap: 4px;
+
+	border: 2px solid red;
+
+}

@@ -1,0 +1,14 @@
+.broadcast-cell {
+
+	position: relative;
+	aspect-ratio: 16/9;
+
+	box-sizing: border-box;
+
+	flex: 0 0 50%;
+
+	background-color: black;
+
+	transition: all .3s;
+
+}
