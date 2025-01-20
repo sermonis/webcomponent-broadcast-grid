@@ -1,2 +1,2 @@
 # broadcast-grid
-Customizable and adaptive video conferencing grid
+Customizable and responsible video conferencing grid
