@@ -1,7 +1,2 @@
-import { useGrid } from './use-grid.ts';
+export * from './use-grid.ts';
 
-export {
-	
-	useGrid,
-
-};
