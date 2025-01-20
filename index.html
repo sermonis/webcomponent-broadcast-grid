@@ -13,6 +13,7 @@
 	<div id="app" style="position: relative; height: 100vh">
 
 		<button onclick="addCell()" style="position: fixed; right: 10px; top: 10px;">+</button>
+		<button onclick="changeGap()" style="position: fixed; right: 10px; top: 50px;">gap +</button>
 
 		<broadcast-grid id="grid">
 		
@@ -24,6 +25,8 @@
 
 	<script>
 
+		let gap = 4;
+
 		function addCell () {
 
 			const cell = document.createElement( 'broadcast-cell' );
@@ -31,6 +34,16 @@
 			const grid = document.getElementById( 'grid' );
 
 			grid.appendChild( cell );
+
+		}
+
+		function changeGap () {
+
+			const cell = document.createElement( 'broadcast-cell' );
+
+			const grid = document.getElementById( 'grid' );
+
+			grid.setAttribute( 'gap', ++gap );
 
 		}
 

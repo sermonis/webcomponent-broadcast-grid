@@ -22,9 +22,9 @@ export class BroadcastGrid extends HTMLElement implements IBroadcastGrid {
 
 	}
 
-	private gapTotalSize( n: number, gap: number = 4 ): number {
+	private gapTotalSize( n: number ): number {
 
-		return ( n - 1 ) * gap;
+		return ( n - 1 ) * this.gap;
 
 	}
 
@@ -71,6 +71,8 @@ export class BroadcastGrid extends HTMLElement implements IBroadcastGrid {
 
 		this.gap = Formatted.formatNumberAttribute( this.getAttribute( 'gap' ), 4 );
 
+		this.style.gap = `${ this.gap }px`;
+
 		this.countCell();
 		
 	}
@@ -80,6 +82,8 @@ export class BroadcastGrid extends HTMLElement implements IBroadcastGrid {
 		this.className = 'broadcast-grid';
 
 		this.gap = Formatted.formatNumberAttribute( this.getAttribute( 'gap' ), 4 );
+
+		this.style.gap = `${ this.gap }px`;
 
 		this.attachShadow( { 'mode': 'open' } );
 
@@ -132,13 +136,7 @@ export class BroadcastGrid extends HTMLElement implements IBroadcastGrid {
 	
 	}
 
-	attributeChangedCallback(
-		
-		name: any,
-		oldValue: any,
-		newValue: any
-	
-	) {
+	attributeChangedCallback() {
 
 		if ( this.rendered ) {
 
