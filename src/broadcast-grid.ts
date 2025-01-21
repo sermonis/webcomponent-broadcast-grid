@@ -1,10 +1,11 @@
 import './css/broadcast-grid.css';
 import { Formatted } from './utils/formatted.ts';
+import { type IAspectRatio } from './utils/parsers/aspect-ratio.ts';
 
 interface IBroadcastGrid {
 
 	gap?: number;
-	aspectRatio?: string;
+	aspectRatio?: IAspectRatio;
 
 };
 
@@ -14,11 +15,13 @@ export class BroadcastGrid extends HTMLElement implements IBroadcastGrid {
 	private mo!: MutationObserver;
 	private rendered!: boolean;
 	public  gap!: number;
-	public  aspectRatio!: string;
+	public  aspectRatio!: IAspectRatio;
 
 	constructor() {
 
 		super();
+
+		this.aspectRatio = { w: 16, h: 9 };
 
 	}
 
@@ -45,7 +48,7 @@ export class BroadcastGrid extends HTMLElement implements IBroadcastGrid {
 
 				const rows = Math.ceil( cellCount / i );
 
-				const topHeight = rows * 9 / 16 * ( gw - this.gapTotalSize( i ) ) / i;
+				const topHeight = rows * this.aspectRatio.h / this.aspectRatio.w * Math.ceil( ( gw - this.gapTotalSize( i ) ) / i );
 
 				if ( topHeight <= ( gh - this.gapTotalSize( rows ) ) ) {
 
@@ -55,7 +58,7 @@ export class BroadcastGrid extends HTMLElement implements IBroadcastGrid {
 
 			}
 
-			const cellWidth = ( gw - this.gapTotalSize( i ) ) / i;
+			const cellWidth = Math.ceil( ( gw - this.gapTotalSize( i ) ) / i );
 
 			for ( const cell of cells ) {
 
@@ -70,6 +73,19 @@ export class BroadcastGrid extends HTMLElement implements IBroadcastGrid {
 	update() {
 
 		this.gap = Formatted.formatNumberAttribute( this.getAttribute( 'gap' ), 4 );
+		this.aspectRatio = Formatted.formatAspectRatio( this.getAttribute( 'aspect-ratio' ), '16/9' );
+
+		const cells = this.querySelectorAll<HTMLElement>( '.broadcast-cell' );
+
+		if ( cells instanceof NodeList ) {
+
+			for ( const cell of cells ) {
+
+				cell.style.aspectRatio = `${ this.aspectRatio.w }/${ this.aspectRatio.h }`;
+
+			}
+
+		}
 
 		this.style.gap = `${ this.gap }px`;
 
@@ -82,6 +98,19 @@ export class BroadcastGrid extends HTMLElement implements IBroadcastGrid {
 		this.className = 'broadcast-grid';
 
 		this.gap = Formatted.formatNumberAttribute( this.getAttribute( 'gap' ), 4 );
+		this.aspectRatio = Formatted.formatAspectRatio( this.getAttribute( 'aspect-ratio' ), '16/9' );
+
+		const cells = this.querySelectorAll<HTMLElement>( '.broadcast-cell' );
+
+		if ( cells instanceof NodeList ) {
+
+			for ( const cell of cells ) {
+
+				cell.style.aspectRatio = `${ this.aspectRatio.w }/${ this.aspectRatio.h }`;
+
+			}
+
+		}
 
 		this.style.gap = `${ this.gap }px`;
 

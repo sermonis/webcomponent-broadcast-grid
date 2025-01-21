@@ -1,0 +1,32 @@
+.broadcast-avatar {
+
+	display: inline-block;
+
+	position: relative;
+
+	border-radius: 100%;
+
+}
+
+	.broadcast-avatar__image {
+
+		position: relative;
+
+		border-radius: 100%;
+
+		width: 100%;
+		height: 100%;
+
+	}
+
+	.broadcast-avatar__circle {
+
+		transition: fill .3s ease-in-out;
+
+	}
+
+broadcast-avatar:not(:defined) {
+
+	display: none;
+
+}

@@ -1,68 +1,55 @@
 import { Size } from './parsers/size.ts';
+import { type IAspectRatio, AspectRatio } from './parsers/aspect-ratio.ts';
 
 export class Formatted {
 
-	static formatStringAttribute ( val: string, valueDefault: string = '' ): string {
+	static formatStringAttribute ( val: string | null, valueDefault: string | null = '' ): string {
 
-		try {
-
-			if ( typeof valueDefault !== 'string' ) throw new Error( 'Formatted -> formatStringAttribute :: default value is not string' );
-
-			if ( typeof val !== 'string' ) return valueDefault;
-
-		} catch ( e ) {
-
-			console.error( e );
+		if ( typeof valueDefault !== 'string' ) {
+			
+			throw new Error( `Formatted -> formatStringAttribute :: invalid valueDefault. Expected "string" type, got "${ typeof valueDefault }"` );
 
 		}
+
+		if ( typeof val !== 'string' ) return valueDefault;
 
 		return val;
 
 	}
 
-	static formatNumberAttribute ( val: string | null, valueDefault: number = 0 ): number {
+	static formatNumberAttribute ( val: string | null, valueDefault: number | null = 0 ): number {
 
-		try {
-
-			if ( typeof valueDefault !== 'number' ) throw new Error( 'Formatted -> formatNumberAttribute :: default value is not number' );
-
-			if ( val === null ) return valueDefault;
-
-			if ( isNaN( +val ) ) return valueDefault;
-
-			return +val;
-
-		} catch ( e ) {
-
-			console.error( e );
+		if ( typeof valueDefault !== 'number' ) {
+			
+			throw new Error( `Formatted -> formatNumberAttribute :: invalid valueDefault. Expected "number" type, got "${ typeof valueDefault }"` );
 
 		}
 
-		return 0;
+		if ( val === null ) return valueDefault;
+
+		if ( isNaN( +val ) ) return valueDefault;
+
+		return +val;
 
 	}
 
-	static formatBooleanAttribute ( val: string, valueDefault: boolean = false ): boolean {
+	static formatBooleanAttribute ( val: string | null, valueDefault: boolean | null = false ): boolean {
 
-		try {
+		const values: Array<string> = [ 'true', 'false' ];
 
-			const values: Array< string > = [ 'true', 'false' ];
+		if ( typeof valueDefault !== 'boolean' ) {
+			
+			throw new Error( `Formatted -> formatNumberAttribute :: invalid valueDefault. Expected "boolean" type, got "${ typeof valueDefault }"` );
 
-			if ( typeof valueDefault !== 'boolean' ) throw new Error( 'Formatted -> formatNumberAttribute :: default value is not boolean' );
+		}
 
-			if ( typeof val === 'string' && values.includes( val ) ) return val === 'true';
+		if ( typeof val === 'string' && values.includes( val ) ) return val === 'true';
 
-			if ( typeof val === 'boolean' ) return val;
+		if ( typeof val === 'boolean' ) return val;
 
-			if ( typeof val === 'string' || val === null ) {
+		if ( typeof val === 'string' || val === null ) {
 
-				return val !== null;
-
-			}
-
-		} catch ( e ) {
-
-			console.error( e );
+			return val !== null;
 
 		}
 
@@ -70,21 +57,21 @@ export class Formatted {
 
 	}
 
-	static formatArrayAttribute ( val: string, defaultValue = [] ): Array<any> {
+	static formatArrayAttribute ( val: string | null, defaultValue = [] ): Array<any> {
 
-		let arr = defaultValue;
+		let arr: Array<any> = defaultValue;
 
-		try {
+		if ( val !== 'string' || !JSON.parse( val ) ) {
+			
+			throw new Error( `Formatted -> formatArrayAttribute :: cannot parse val as JSON` );
 
-			if ( val !== 'string' || !JSON.parse( val ) ) throw new Error( 'Formatted -> formatArrayAttribute :: invalid value format' );
+		}
 
-			let arr = JSON.parse( val );
+		arr = JSON.parse( val );
 
-			if ( !( arr instanceof Array ) ) throw new Error( 'Formatted -> formatArrayAttribute :: invalid value format' );
-
-		} catch ( e ) {
-
-			console.error( e );
+		if ( !( arr instanceof Array ) ) {
+			
+			throw new Error( 'Formatted -> formatArrayAttribute :: invalid value. Expected "array"' );
 
 		}
 
@@ -92,7 +79,7 @@ export class Formatted {
 
 	}
 
-    static formatValues ( val: string, valueDefault: string = '24px' ): string {
+    static formatValues ( val: string | null, valueDefault: string = '24px' ): string {
 
 		let currentValue = val;
 
@@ -114,6 +101,65 @@ export class Formatted {
     
         return `${ currentValue }px`;
 
+    }
+
+	static formatAspectRatio ( val: string | null, valueDefault: string = '19/6' ): IAspectRatio {
+
+		let aspectRatio: IAspectRatio | null = AspectRatio.parse( val );
+		let defaultAspectRation: IAspectRatio | null = AspectRatio.parse( valueDefault );
+
+		if ( typeof valueDefault !== 'string' || !defaultAspectRation ) {
+
+			throw new Error( 'Formatted -> formatAspectRatio :: invalid valueDefault format' );
+
+		}
+
+		if ( !aspectRatio ) {
+
+			aspectRatio = defaultAspectRation;
+
+		}
+
+		return aspectRatio;
+
+	}
+
+    static formatAvatarName ( name: string ): string {
+
+		if ( typeof name !== 'string' ) {
+
+			throw new Error( `Formatted -> formatAvatarName :: invalid name. Expected "string" type, got "${ typeof name }"` );
+
+		}
+
+        if (!!name) {
+    
+            const parts = name.trim().split(' ');
+    
+            if (parts.length > 1) {
+    
+                return [ 
+                    
+                    parts[0].trim().charAt(0), 
+                    parts[1].trim().charAt(0),
+                
+                ].join('').toUpperCase();
+    
+            } else {
+    
+                return [ 
+                    
+                    parts[0].trim().charAt(0), 
+                    parts[0].trim().charAt(1),
+                
+                ].join( '' ).toUpperCase();
+    
+            }
+    
+        }
+    
+        return '';
+    
     }
 
 };

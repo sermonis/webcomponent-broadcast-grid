@@ -7,8 +7,23 @@
 
 	flex: 0 0 50%;
 
-	background-color: black;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
 
 	transition: all .3s;
 
 }
+
+	.broadcast-cell_disabled {
+
+		pointer-events: none;
+
+	}
+
+broadcast-cell:not(:defined) {
+
+	display: none;
+
+}
+

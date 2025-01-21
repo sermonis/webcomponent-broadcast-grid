@@ -5,19 +5,94 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + TS</title>
-	<link rel="stylesheet" href="./src/style.css" />
+	<style>
+
+		html, body {
+
+			margin: 0;
+			padding: 0;
+
+			background-color: #222222;
+
+		}
+
+	</style>
   </head>
   <body>
-    <script type="module" src="/src/index.ts"></script>
+    <!-- <script type="module" src="/src/index.ts"></script> -->
+
+	<script type="module">
+		import { useGrid } from './src/index.ts';
+
+		document.addEventListener( 'DOMContentLoaded', () => {
+
+			useGrid();
+
+		} );
+
+	</script>
 
 	<div id="app" style="position: relative; height: 100vh">
 
-		<button onclick="addCell()" style="position: fixed; right: 10px; top: 10px;">+</button>
-		<button onclick="changeGap()" style="position: fixed; right: 10px; top: 50px;">gap +</button>
+		<select onchange="onChange(event)" style="position: fixed; left: 10px; top: 10px;">
+
+			<option value="16/9">16/9</option>
+			<option value="4/3">4/3</option>
+			<option value="1/1">1/1</option>
+			<option value="1/2">1/2</option>
+
+		</select>
 
 		<broadcast-grid id="grid">
 		
+			<broadcast-cell>
+			
+				<broadcast-layer style="display: flex; justify-content: center; align-items: center;">
 
+					<broadcast-avatar
+
+						color="#992255"
+						name="Дмитрий Волгапкин"
+
+					></broadcast-avatar>
+
+				</broadcast-layer>
+			
+			</broadcast-cell>
+		
+			<broadcast-cell>
+			
+				<broadcast-layer style="display: flex; justify-content: center; align-items: center;">
+
+					<broadcast-avatar
+
+						color="#992255"
+						name="Дмитрий Волгапкин"
+
+					></broadcast-avatar>
+
+				</broadcast-layer>
+			
+			</broadcast-cell>
+		
+			<broadcast-cell>
+			
+				<broadcast-layer style="display: flex; justify-content: center; align-items: center;">
+
+					<!-- <broadcast-avatar
+
+						color="#999999"
+						name="Дмитрий Волгапкин"
+
+					></broadcast-avatar> -->
+
+					<broadcast-video src="/sample-10s.mp4" autoplay muted></broadcast-video>
+
+				</broadcast-layer>
+
+				<broadcast-frame halo-size="10"></broadcast-frame>
+			
+			</broadcast-cell>
 		
 		</broadcast-grid>
 
@@ -26,6 +101,14 @@
 	<script>
 
 		let gap = 4;
+
+		function onChange(e) {
+
+			const grid = document.getElementById( 'grid' );
+
+			grid.setAttribute( 'aspect-ratio', e.target.value );
+
+		}
 
 		function addCell () {
 
