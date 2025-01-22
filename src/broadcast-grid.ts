@@ -42,27 +42,28 @@ export class BroadcastGrid extends HTMLElement implements IBroadcastGrid {
 
 			const cellCount = cells.length;
 
-			let i = 1;
+			let cols = 1;
+			let rows = 0;
+			let topHeight = 0;
 
-			for ( ; i < cellCount; i++ ) {
+			for ( ; cols <= cellCount; cols++ ) {
 
-				const rows = Math.ceil( cellCount / i );
+				rows = Math.ceil( cellCount / cols );
 
-				const topHeight = rows * this.aspectRatio.h / this.aspectRatio.w * Math.ceil( ( gw - this.gapTotalSize( i ) ) / i );
+				topHeight = rows * this.aspectRatio.h / this.aspectRatio.w * ( gw - this.gapTotalSize( cols ) ) / cols;
 
-				if ( topHeight <= ( gh - this.gapTotalSize( rows ) ) ) {
-
-					break;
-
-				}
+				if ( topHeight <= ( gh - this.gapTotalSize( rows ) ) ) break;
 
 			}
 
-			const cellWidth = Math.ceil( ( gw - this.gapTotalSize( i ) ) / i );
+			// const k = ( topHeight >= gh ) ? gh / topHeight : 1;
+
+			const cellWidth = ( gw - this.gapTotalSize( cols ) ) / cols;//  * k;
 
 			for ( const cell of cells ) {
 
 				cell.style.flex = `0 0 ${ cellWidth }px`;
+				// cell.style.width = `${ cellWidth }px`;
 
 			}
 
