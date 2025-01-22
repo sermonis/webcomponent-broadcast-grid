@@ -22,7 +22,7 @@
     <!-- <script type="module" src="/src/index.ts"></script> -->
 
 	<script type="module">
-		import { useGrid } from './src/index.ts';
+		import { useGrid, Transform } from './src/index.ts';
 
 		document.addEventListener( 'DOMContentLoaded', () => {
 
@@ -42,6 +42,8 @@
 			<option value="1/2">1/2</option>
 
 		</select> -->
+
+		<img id="pic" style="transition: all .2s; position: fixed; width: 300px; left: 100px; top: 100px; z-index: 10000; border: 2px solid red;" src="/demo.jpg" />
 
 		<broadcast-grid id="grid">
 		
@@ -127,14 +129,6 @@
 	<script>
 
 		let gap = 4;
-
-		function onChange(e) {
-
-			const grid = document.getElementById( 'grid' );
-
-			grid.setAttribute( 'aspect-ratio', e.target.value );
-
-		}
 
 		function addCell () {
 

@@ -1,5 +1,6 @@
 import './css/broadcast-grid.css';
 import { Formatted } from './utils/formatted.ts';
+import { Transform } from './utils/transform.ts';
 import { type IAspectRatio } from './utils/parsers/aspect-ratio.ts';
 
 interface IBroadcastGrid {
@@ -30,6 +31,42 @@ export class BroadcastGrid extends HTMLElement implements IBroadcastGrid {
 		return ( n - 1 ) * this.gap;
 
 	}
+
+	/**
+	 * 
+	 */
+	// private locateCell(
+		
+	// 		grid: HTMLElement,
+	// 		el: HTMLElement,
+	// 		cols: number,
+	// 		gap: number,
+	// 		n: number,
+	// 		x: number,
+	// 		y: number,
+	// 		w: number,
+	// 		h: number,
+		
+	// 	): void {
+
+	// 	const gridWidth = grid.clientWidth;
+	// 	const gridHeight = grid.clientHeight;
+
+	// 	const centerX = gridWidth / 2;
+	// 	const centerY = gridHeight / 2;
+
+	// 	// позиция в столбце
+	// 	const colPos = Math.ceil( n / cols );
+
+	// 	// позиция в строке
+	// 	const rowPos = n % cols;
+
+	// 	// координата x
+	// 	const posX = centerX - rowPos
+
+	// 	Transform.moveTo(  )
+
+	// }
 
 	private countCell(): void {
 

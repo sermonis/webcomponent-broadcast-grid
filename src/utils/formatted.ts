@@ -79,7 +79,7 @@ export class Formatted {
 
 	}
 
-    static formatValues ( val: string | null, valueDefault: string = '24px' ): string {
+    static formatValues ( val: string | number | null, valueDefault: string = '24px' ): string {
 
 		let currentValue = val;
 
