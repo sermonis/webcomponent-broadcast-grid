@@ -1,5 +1,5 @@
 import './css/broadcast-layer.css';
-import { Formatted } from './utils/formatted.ts';
+// import { Formatted } from './utils/formatted.ts';
 
 export class BroadcastOverflow extends HTMLElement {
 
@@ -20,9 +20,9 @@ export class BroadcastOverflow extends HTMLElement {
 
 		this.className = 'broadcast-overflow';
 
-		const color: string = Formatted.formatStringAttribute( this.getAttribute( 'color' ), '#000000' );
-		const opacity: string = Formatted.formatStringAttribute( this.getAttribute( 'color' ), '50%' );
-		const filter: string = Formatted.formatStringAttribute( this.getAttribute( 'filter' ), 'none' );
+		// const color: string = Formatted.formatStringAttribute( this.getAttribute( 'color' ), '#000000' );
+		// const opacity: string = Formatted.formatStringAttribute( this.getAttribute( 'color' ), '50%' );
+		// const filter: string = Formatted.formatStringAttribute( this.getAttribute( 'filter' ), 'none' );
 
 		this.rendered = true;
 

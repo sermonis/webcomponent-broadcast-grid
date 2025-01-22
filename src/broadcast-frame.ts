@@ -15,7 +15,7 @@ export class BroadcastFrame extends HTMLElement {
 
 		const width: number = Formatted.formatNumberAttribute( this.getAttribute( 'width' ), 3 );
 		const haloSize: number = Formatted.formatNumberAttribute( this.getAttribute( 'halo-size' ), 0 );
-		const volume: number = Formatted.formatNumberAttribute( this.getAttribute( 'volume' ), 0 );
+		// const volume: number = Formatted.formatNumberAttribute( this.getAttribute( 'volume' ), 0 );
 		const color: string = Formatted.formatStringAttribute( this.getAttribute( 'color' ), '#ff9900' );
 
 		this.style.border = `${ width }px solid ${ color }`;
@@ -29,7 +29,7 @@ export class BroadcastFrame extends HTMLElement {
 
 		const width: number = Formatted.formatNumberAttribute( this.getAttribute( 'width' ), 3 );
 		const haloSize: number = Formatted.formatNumberAttribute( this.getAttribute( 'halo-size' ), 0 );
-		const volume: number = Formatted.formatNumberAttribute( this.getAttribute( 'volume' ), 0 );
+		// const volume: number = Formatted.formatNumberAttribute( this.getAttribute( 'volume' ), 0 );
 		const color: string = Formatted.formatStringAttribute( this.getAttribute( 'color' ), '#ff9900' );
 
 		this.style.border = `${ width }px solid ${ color }`;
