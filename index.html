@@ -22,7 +22,7 @@
     <!-- <script type="module" src="/src/index.ts"></script> -->
 
 	<script type="module">
-		import { useGrid, Transform } from './src/index.ts';
+		import { useGrid } from './src/index.ts';
 
 		document.addEventListener( 'DOMContentLoaded', () => {
 
@@ -34,86 +34,21 @@
 
 	<div id="app" style="position: relative; height: 100vh">
 
-		<!-- <select onchange="onChange(event)" style="position: fixed; left: 10px; top: 10px;">
+		<button onclick="addCell()" style="position: fixed; left: 10px; top: 10px; z-index: 1000">
 
-			<option value="16/9">16/9</option>
-			<option value="4:3">4/3</option>
-			<option value="1/1">1/1</option>
-			<option value="1/2">1/2</option>
+			+
 
-		</select> -->
-
-		<img id="pic" style="transition: all .2s; position: fixed; width: 300px; left: 100px; top: 100px; z-index: 10000; border: 2px solid red;" src="/demo.jpg" />
+		</button>
 
 		<broadcast-grid id="grid">
 		
-			<broadcast-cell elevation="0">
+			<broadcast-cell>
 			
 				<broadcast-layer style="display: flex; justify-content: center; align-items: center;">
 
 					<broadcast-avatar
 
 						color="#992255"
-						name="Дмитрий Волгапкин"
-
-					></broadcast-avatar>
-
-				</broadcast-layer>
-			
-			</broadcast-cell>
-		
-			<broadcast-cell elevation="0">
-			
-				<broadcast-layer style="display: flex; justify-content: center; align-items: center;">
-
-					<broadcast-avatar
-
-						color="#994300"
-						name="Лара Крофт"
-
-					></broadcast-avatar>
-
-				</broadcast-layer>
-			
-			</broadcast-cell>
-		
-			<broadcast-cell elevation="0">
-			
-				<broadcast-layer style="display: flex; justify-content: center; align-items: center;">
-
-					<broadcast-avatar
-
-						color="#642211"
-						name="Дмитрий Дмитрий"
-
-					></broadcast-avatar>
-
-				</broadcast-layer>
-			
-			</broadcast-cell>
-		
-			<broadcast-cell elevation="0">
-			
-				<broadcast-layer style="display: flex; justify-content: center; align-items: center;">
-
-					<broadcast-avatar
-
-						color="#008822"
-						name="Сергей Сергей"
-
-					></broadcast-avatar>
-
-				</broadcast-layer>
-			
-			</broadcast-cell>
-		
-			<broadcast-cell elevation="0">
-			
-				<broadcast-layer style="display: flex; justify-content: center; align-items: center;">
-
-					<broadcast-avatar
-
-						color="#631134"
 						name="Дмитрий Волгапкин"
 
 					></broadcast-avatar>
@@ -137,6 +72,22 @@
 			const grid = document.getElementById( 'grid' );
 
 			grid.appendChild( cell );
+
+			const layer = document.createElement( 'broadcast-layer' );
+
+			layer.style.display = 'flex';
+			layer.style.justifyContent = 'center';
+			layer.style.alignItems = 'center';
+
+			cell.appendChild( layer );
+
+			const avatar = document.createElement( 'broadcast-avatar' );
+
+			avatar.setAttribute( 'name', 'AA AA' );
+
+			avatar.setAttribute( 'color', '#920043' );
+
+			layer.appendChild( avatar );
 
 		}
 

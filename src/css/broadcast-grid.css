@@ -1,20 +1,17 @@
 .broadcast-grid {
 
+	position: relative;
+
 	height: 100%;
 	width: 100%;
 
-	display: flex;
-	justify-content: center;
-	align-content: center;
-	flex-wrap: wrap;
-
-	gap: 4px;
-
-	overflow: hidden;
+	display: block;
 
 	box-sizing: border-box;
 
 	padding: 0;
+	
+	overflow: hidden;
 
 }
 

@@ -2,7 +2,7 @@
 
 Customizable and responsive video conferencing grid. If you need to make your own [***video conference system***](https://en.wikipedia.org/wiki/Videotelephony), you can use it!
 
-![Grid](https://github.com/dimacrossbowweb/broadcast-grid/blob/main/public/demo.jpg)
+![Grid demo](https://github.com/dimacrossbowweb/broadcast-grid/blob/main/public/demo.gif)
 
 ### Install
 

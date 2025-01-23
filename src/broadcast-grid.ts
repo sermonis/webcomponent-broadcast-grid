@@ -35,38 +35,39 @@ export class BroadcastGrid extends HTMLElement implements IBroadcastGrid {
 	/**
 	 * 
 	 */
-	// private locateCell(
+	private locateCell(
 		
-	// 		grid: HTMLElement,
-	// 		el: HTMLElement,
-	// 		cols: number,
-	// 		gap: number,
-	// 		n: number,
-	// 		x: number,
-	// 		y: number,
-	// 		w: number,
-	// 		h: number,
+			el: HTMLElement,
+			cols: number,
+			rows: number,
+			x: number,
+			y: number,
+			w: number,
+			h: number,
 		
-	// 	): void {
+		): void {
 
-	// 	const gridWidth = grid.clientWidth;
-	// 	const gridHeight = grid.clientHeight;
+		// центр грида
+		const centerX = this.clientWidth / 2;
+		const centerY = this.clientHeight / 2;
 
-	// 	const centerX = gridWidth / 2;
-	// 	const centerY = gridHeight / 2;
+		// центр строки
+		const rowCenter = ( cols * w + this.gapTotalSize( cols ) ) / 2;
 
-	// 	// позиция в столбце
-	// 	const colPos = Math.ceil( n / cols );
+		// центр столбца
+		const colCenter = ( rows * h + this.gapTotalSize( rows ) ) / 2;
 
-	// 	// позиция в строке
-	// 	const rowPos = n % cols;
+		// координаты по вертикали
+		const posY = centerY - colCenter + y * h + this.gapTotalSize( y + 1 );
 
-	// 	// координата x
-	// 	const posX = centerX - rowPos
+		// координаты по горизонтали
+		const posX = centerX - rowCenter + x * w + this.gapTotalSize( x + 1 );
 
-	// 	Transform.moveTo(  )
+		// трансформация ячеек
+		Transform.moveTo( el, { x: posX, y: posY } );
+		Transform.scale( el, { w, h } );
 
-	// }
+	}
 
 	private countCell(): void {
 
@@ -97,10 +98,21 @@ export class BroadcastGrid extends HTMLElement implements IBroadcastGrid {
 
 			const cellWidth = ( gw - this.gapTotalSize( cols ) ) / cols;//  * k;
 
-			for ( const cell of cells ) {
+			const residualCols = cells.length % cols;
 
-				cell.style.flex = `0 0 ${ cellWidth }px`;
-				// cell.style.width = `${ cellWidth }px`;
+			for ( let cellIndex = 0; cellIndex < cells.length; cellIndex++ ) {
+
+				this.locateCell( 
+
+					cells[ cellIndex ],                                                         // el
+					residualCols > 0 && Math.floor( cellIndex / cols ) === ( rows - 1 ) ? residualCols : cols, // cols count
+					rows,                                                                       // rows count
+					cellIndex % cols,                                                           // posX
+					Math.floor( cellIndex / cols ),                                             // poxY
+					cellWidth,                                                                  // cell width
+					cellWidth * this.aspectRatio.h / this.aspectRatio.w,                        // cell height
+
+				);
 
 			}
 
