@@ -57,3 +57,5 @@ export class BroadcastLayer extends HTMLElement {
 	}
 
 };
+
+customElements.define( 'broadcast-layer', BroadcastLayer );

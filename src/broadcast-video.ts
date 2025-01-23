@@ -105,3 +105,5 @@ export class BroadcastVideo extends HTMLElement {
 	}
 
 };
+
+customElements.define( 'broadcast-video', BroadcastVideo );

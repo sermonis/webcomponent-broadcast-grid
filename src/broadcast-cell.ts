@@ -113,3 +113,5 @@ export class BroadcastCell extends HTMLElement {
 	}
 
 };
+
+customElements.define( 'broadcast-cell', BroadcastCell );

@@ -230,3 +230,5 @@ export class BroadcastGrid extends HTMLElement implements IBroadcastGrid {
 	}
 
 };
+
+customElements.define( 'broadcast-grid', BroadcastGrid );

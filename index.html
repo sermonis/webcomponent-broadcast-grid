@@ -73,21 +73,32 @@
 
 			grid.appendChild( cell );
 
+			const frame = document.createElement( 'broadcast-frame' );
+			
+			cell.appendChild( frame );
+
 			const layer = document.createElement( 'broadcast-layer' );
 
-			layer.style.display = 'flex';
-			layer.style.justifyContent = 'center';
-			layer.style.alignItems = 'center';
+			const video = document.createElement( 'broadcast-video' );
+
+			video.setAttribute( 'src', '/video.mp4' );
+			video.setAttribute( 'autoplay', 'true' );
+
+			layer.appendChild( video );
+
+			// layer.style.display = 'flex';
+			// layer.style.justifyContent = 'center';
+			// layer.style.alignItems = 'center';
 
 			cell.appendChild( layer );
 
-			const avatar = document.createElement( 'broadcast-avatar' );
+			// const avatar = document.createElement( 'broadcast-avatar' );
 
-			avatar.setAttribute( 'name', 'AA AA' );
+			// avatar.setAttribute( 'name', 'AA AA' );
 
-			avatar.setAttribute( 'color', '#920043' );
+			// avatar.setAttribute( 'color', '#920043' );
 
-			layer.appendChild( avatar );
+			// layer.appendChild( avatar );
 
 		}
 

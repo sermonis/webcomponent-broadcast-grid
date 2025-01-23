@@ -214,3 +214,5 @@ export class BroadcastAvatar extends HTMLElement {
     }
 
 }
+
+customElements.define( 'broadcast-avatar', BroadcastAvatar );

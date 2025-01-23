@@ -73,3 +73,5 @@ export class BroadcastFrame extends HTMLElement {
 	}
 
 };
+
+customElements.define( 'broadcast-frame', BroadcastFrame );
