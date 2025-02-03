@@ -2,7 +2,7 @@
   
   "name": "broadcast-grid",
   "private": false,
-  "version": "1.0.6",
+  "version": "1.0.7",
   "type": "module",
   "description": "Video conference system grid-component",
   "main": "dist/broadcast-grid.umd.js",
