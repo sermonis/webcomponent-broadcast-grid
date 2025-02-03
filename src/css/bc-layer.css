@@ -1,4 +1,4 @@
-.broadcast-frame {
+.bc-layer {
 
 	position: absolute;
 
@@ -12,13 +12,11 @@
 
 	box-sizing: border-box;
 
-	z-index: 10;
-
-	transition: opacity .2s;
+	z-index: 1;
 
 }
 
-broadcast-frame:not(:defined) {
+bc-layer:not(:defined) {
 
 	display: none;
 

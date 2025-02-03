@@ -1,4 +1,4 @@
-.broadcast-avatar {
+.bc-avatar {
 
 	display: inline-block;
 
@@ -8,7 +8,7 @@
 
 }
 
-	.broadcast-avatar__image {
+	.bc-avatar__image {
 
 		position: relative;
 
@@ -19,13 +19,13 @@
 
 	}
 
-	.broadcast-avatar__circle {
+	.bc-avatar__circle {
 
 		transition: fill .3s ease-in-out;
 
 	}
 
-broadcast-avatar:not(:defined) {
+bc-avatar:not(:defined) {
 
 	display: none;
 

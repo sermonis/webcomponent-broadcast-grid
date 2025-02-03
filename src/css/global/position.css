@@ -1,0 +1,11 @@
+.p-relative { position: relative; }
+.p-fixed { position: fixed; }
+.p-absolute { position: absolute; }
+.p-sticky { position: sticky; }
+.p-auto { position: auto; }
+.p-static { position: static; }
+.p-inherit { position: inherit; }
+.p-unset { position: unset; }
+.p-initial { position: initial; }
+.p-revert { position: revert; }
+.p-revert-layer { position: revert-layer; }

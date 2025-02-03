@@ -1,4 +1,4 @@
-.broadcast-layer {
+.bc-video {
 
 	position: absolute;
 
@@ -12,11 +12,20 @@
 
 	box-sizing: border-box;
 
-	z-index: 1;
-
 }
 
-broadcast-layer:not(:defined) {
+	.bc-video__video {
+
+		object-fit: cover;
+
+		width: 100%;
+		height: 100%;
+
+		border-radius: inherit;
+
+	}
+
+bc-video:not(:defined) {
 
 	display: none;
 

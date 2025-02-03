@@ -1,16 +1,16 @@
-import './css/broadcast-grid.css';
+import './css/bc-grid.css';
 import { Formatted } from './utils/formatted.ts';
 import { Transform } from './utils/transform.ts';
 import { type IAspectRatio } from './utils/parsers/aspect-ratio.ts';
 
-interface IBroadcastGrid {
+interface IBcGrid {
 
 	gap?: number;
 	aspectRatio?: IAspectRatio;
 
 };
 
-export class BroadcastGrid extends HTMLElement implements IBroadcastGrid {
+export class BcGrid extends HTMLElement implements IBcGrid {
 
 	private ro!: ResizeObserver;
 	private mo!: MutationObserver;
@@ -74,7 +74,7 @@ export class BroadcastGrid extends HTMLElement implements IBroadcastGrid {
 		const gw = this.clientWidth;
 		const gh = this.clientHeight;
 
-		const cells = this.querySelectorAll<HTMLElement>( '.broadcast-cell' );
+		const cells = this.querySelectorAll<HTMLElement>( '.bc-cell' );
 
 		if ( cells instanceof NodeList ) {
 
@@ -125,7 +125,7 @@ export class BroadcastGrid extends HTMLElement implements IBroadcastGrid {
 		this.gap = Formatted.formatNumberAttribute( this.getAttribute( 'gap' ), 4 );
 		this.aspectRatio = Formatted.formatAspectRatio( this.getAttribute( 'aspect-ratio' ), '16/9' );
 
-		const cells = this.querySelectorAll<HTMLElement>( '.broadcast-cell' );
+		const cells = this.querySelectorAll<HTMLElement>( '.bc-cell' );
 
 		if ( cells instanceof NodeList ) {
 
@@ -145,12 +145,12 @@ export class BroadcastGrid extends HTMLElement implements IBroadcastGrid {
 
 	render() {
 
-		this.className = 'broadcast-grid';
+		this.className = 'bc-grid';
 
 		this.gap = Formatted.formatNumberAttribute( this.getAttribute( 'gap' ), 4 );
 		this.aspectRatio = Formatted.formatAspectRatio( this.getAttribute( 'aspect-ratio' ), '16/9' );
 
-		const cells = this.querySelectorAll<HTMLElement>( '.broadcast-cell' );
+		const cells = this.querySelectorAll<HTMLElement>( '.bc-cell' );
 
 		if ( cells instanceof NodeList ) {
 
@@ -231,4 +231,4 @@ export class BroadcastGrid extends HTMLElement implements IBroadcastGrid {
 
 };
 
-customElements.define( 'broadcast-grid', BroadcastGrid );
+customElements.define( 'bc-grid', BcGrid );

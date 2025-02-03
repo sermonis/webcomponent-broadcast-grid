@@ -22,11 +22,21 @@
     <!-- <script type="module" src="/src/index.ts"></script> -->
 
 	<script type="module">
-		import { useGrid } from './src/index.ts';
+		import { BcGrid, BcCell, BcVideo } from './src/index.ts';
 
 		document.addEventListener( 'DOMContentLoaded', () => {
 
-			useGrid();
+			navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+				.then(function(stream) {
+
+					const video = document.getElementById( 'video' );
+
+					video.srcObject.value = stream;
+
+				})
+				.catch(function(err) {
+					console.log("An error occurred: " + err);
+				});
 
 		} );
 
@@ -34,36 +44,105 @@
 
 	<div id="app" style="position: relative; height: 100vh">
 
-		<button onclick="addCell()" style="position: fixed; left: 10px; top: 10px; z-index: 1000">
+		<button onclick="playOrStop()" style="position: fixed; left: 10px; top: 10px; z-index: 1000">
 
-			+
+			Play
 
 		</button>
 
-		<broadcast-grid id="grid">
+		<bc-grid id="grid">
 		
-			<broadcast-cell>
+			<bc-cell>
 			
-				<broadcast-layer style="display: flex; justify-content: center; align-items: center;">
+				<bc-layer style="display: flex; justify-content: center; align-items: center;">
 
-					<broadcast-avatar
+					<bc-avatar
 
 						color="#992255"
 						name="Дмитрий Волгапкин"
 
-					></broadcast-avatar>
+					></bc-avatar>
 
-				</broadcast-layer>
+				</bc-layer>
 			
-			</broadcast-cell>
+			</bc-cell>
 		
-		</broadcast-grid>
+			<bc-cell>
+			
+				<bc-layer style="display: flex; justify-content: center; align-items: center;">
+
+				</bc-layer>
+
+				<bc-video id="video"></bc-video>
+			
+			</bc-cell>
+		
+			<bc-cell>
+			
+				<bc-layer style="display: flex; justify-content: center; align-items: center;">
+
+					<bc-avatar
+
+						color="#992255"
+						name="Дмитрий Волгапкин"
+
+					></bc-avatar>
+
+				</bc-layer>
+			
+			</bc-cell>
+		
+		</bc-grid>
 
 	</div>
 
 	<script>
 
 		let gap = 4;
+
+		let play = false;
+
+		let mediaStream = null;
+
+		function playOrStop () {
+
+			play = !play;
+
+			if ( play ) {
+
+				navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+					.then(function(stream) {
+
+						mediaStream = stream;
+
+						const video = document.getElementById( 'video' );
+
+						video.srcObject.value = stream;
+
+					})
+					.catch(function(err) {
+						console.log("An error occurred: " + err);
+					});
+
+			} else {
+
+				const video = document.getElementById( 'video' );
+
+				video.srcObject.value = null;
+
+				if (mediaStream) {
+					mediaStream.getTracks().forEach((track) => {
+					track.stop();
+
+					
+
+					});
+					mediaStream = null;
+				}
+
+			}
+
+		}
 
 		function addCell () {
 

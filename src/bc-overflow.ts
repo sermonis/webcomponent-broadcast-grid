@@ -1,7 +1,7 @@
-import './css/broadcast-layer.css';
+import './css/bc-layer.css';
 // import { Formatted } from './utils/formatted.ts';
 
-export class BroadcastOverflow extends HTMLElement {
+export class BcOverflow extends HTMLElement {
 
 	private rendered: boolean = false;
 
@@ -18,7 +18,7 @@ export class BroadcastOverflow extends HTMLElement {
 
 	render() {
 
-		this.className = 'broadcast-overflow';
+		this.className = 'bc-overflow';
 
 		// const color: string = Formatted.formatStringAttribute( this.getAttribute( 'color' ), '#000000' );
 		// const opacity: string = Formatted.formatStringAttribute( this.getAttribute( 'color' ), '50%' );

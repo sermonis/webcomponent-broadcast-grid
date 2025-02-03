@@ -1,7 +1,7 @@
-import './css/broadcast-frame.css';
+import './css/bc-frame.css';
 import { Formatted } from './utils/formatted.ts';
 
-export class BroadcastFrame extends HTMLElement {
+export class BcFrame extends HTMLElement {
 
 	private rendered: boolean = false;
 
@@ -25,7 +25,7 @@ export class BroadcastFrame extends HTMLElement {
 
 	render() {
 
-		this.className = 'broadcast-frame';
+		this.className = 'bc-frame';
 
 		const width: number = Formatted.formatNumberAttribute( this.getAttribute( 'width' ), 3 );
 		const haloSize: number = Formatted.formatNumberAttribute( this.getAttribute( 'halo-size' ), 0 );
@@ -74,4 +74,4 @@ export class BroadcastFrame extends HTMLElement {
 
 };
 
-customElements.define( 'broadcast-frame', BroadcastFrame );
+customElements.define( 'bc-frame', BcFrame );

@@ -1,8 +1,8 @@
-import './css/broadcast-avatar.css';
+import './css/bc-avatar.css';
 import { Formatted } from './utils/formatted';
 import { Color } from './utils/color';
 
-export class BroadcastAvatar extends HTMLElement {
+export class BcAvatar extends HTMLElement {
 
 	private imageId!: string;
 	private rendered!: boolean;
@@ -28,7 +28,7 @@ export class BroadcastAvatar extends HTMLElement {
         this.style.width = size;
         this.style.height = size;
 
-		const image = this.querySelector<HTMLElement>( '.broadcast-avatar__image' );
+		const image = this.querySelector<HTMLElement>( '.bc-avatar__image' );
 
 		if ( image ) {
 
@@ -36,7 +36,7 @@ export class BroadcastAvatar extends HTMLElement {
 
 		}
 
-		const fill = this.querySelector<HTMLElement>( '.broadcast-avatar__fill' );
+		const fill = this.querySelector<HTMLElement>( '.bc-avatar__fill' );
 
 		if ( fill ) {
 
@@ -44,7 +44,7 @@ export class BroadcastAvatar extends HTMLElement {
 
 		}
 
-		const text = this.querySelector<HTMLElement>( '.broadcast-avatar__text' );
+		const text = this.querySelector<HTMLElement>( '.bc-avatar__text' );
 
 		if ( text ) {
 
@@ -55,7 +55,7 @@ export class BroadcastAvatar extends HTMLElement {
 
 		}
 
-		const picture = this.querySelector<HTMLElement>( '.broadcast-avatar__picture' );
+		const picture = this.querySelector<HTMLElement>( '.bc-avatar__picture' );
 
 		if ( picture ) {
 
@@ -67,7 +67,7 @@ export class BroadcastAvatar extends HTMLElement {
 
     render() {
 
-        this.classList.add( 'broadcast-avatar' );
+        this.classList.add( 'bc-avatar' );
 
         const name: string = Formatted.formatStringAttribute( this.getAttribute( 'name' ), '' ); 
         const src: string = Formatted.formatStringAttribute( this.getAttribute( 'src' ), '' ); 
@@ -85,7 +85,7 @@ export class BroadcastAvatar extends HTMLElement {
             <svg
             
                 viewBox="0 0 100 100"
-                class="broadcast-avatar__image"
+                class="bc-avatar__image"
 
 
 				width="100%"
@@ -101,7 +101,7 @@ export class BroadcastAvatar extends HTMLElement {
 
 			<circle
 
-				class="broadcast-avatar__fill"
+				class="bc-avatar__fill"
 				cx="50"
 				cy="50"
 				r="50"
@@ -111,7 +111,7 @@ export class BroadcastAvatar extends HTMLElement {
 		
 			<text 
 			
-				class="broadcast-avatar__text"
+				class="bc-avatar__text"
 				x="50%" 
 				y="50%"
 				alignment-baseline="middle" 
@@ -136,7 +136,7 @@ export class BroadcastAvatar extends HTMLElement {
                     <pattern
 
                         id="${ this.imageId }"
-						class="broadcast-avatar__pattern"
+						class="bc-avatar__pattern"
                         patternUnits="userSpaceOnUse"
                         width="100"
                         height="100"
@@ -146,7 +146,7 @@ export class BroadcastAvatar extends HTMLElement {
                         <image
                         
                             href="${ src }"
-							class="broadcast-avatar__picture"
+							class="bc-avatar__picture"
                             x="0"
                             y="0"
                             width="100"
@@ -158,7 +158,7 @@ export class BroadcastAvatar extends HTMLElement {
 
                 <circle
 
-					class="broadcast-avatar__circle"
+					class="bc-avatar__circle"
                     cx="50"
                     cy="50"
                     r="50"
@@ -215,4 +215,4 @@ export class BroadcastAvatar extends HTMLElement {
 
 }
 
-customElements.define( 'broadcast-avatar', BroadcastAvatar );
+customElements.define( 'bc-avatar', BcAvatar );

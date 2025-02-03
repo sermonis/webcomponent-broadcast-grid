@@ -1,7 +1,7 @@
-import './css/broadcast-layer.css';
+import './css/bc-layer.css';
 // import { Formatted } from './utils/formatted.ts';
 
-export class BroadcastLayer extends HTMLElement {
+export class BcLayer extends HTMLElement {
 
 	private rendered: boolean = false;
 
@@ -18,7 +18,7 @@ export class BroadcastLayer extends HTMLElement {
 
 	render() {
 
-		this.className = 'broadcast-layer';
+		this.className = 'bc-layer';
 
 		this.rendered = true;
 
@@ -58,4 +58,4 @@ export class BroadcastLayer extends HTMLElement {
 
 };
 
-customElements.define( 'broadcast-layer', BroadcastLayer );
+customElements.define( 'bc-layer', BcLayer );

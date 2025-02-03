@@ -1,4 +1,4 @@
-.broadcast-cell {
+.bc-cell {
 
 	/* position: relative; */
 
@@ -16,13 +16,13 @@
 
 }
 
-	.broadcast-cell_disabled {
+	.bc-cell_disabled {
 
 		pointer-events: none;
 
 	}
 
-broadcast-cell:not(:defined) {
+bc-cell:not(:defined) {
 
 	display: none;
 

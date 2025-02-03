@@ -1,7 +1,7 @@
-import './css/broadcast-cell.css';
+import './css/bc-cell.css';
 import { Formatted } from './utils/formatted.ts';
 
-export class BroadcastCell extends HTMLElement {
+export class BcCell extends HTMLElement {
 
 	private rendered: boolean = false;
 
@@ -39,13 +39,13 @@ export class BroadcastCell extends HTMLElement {
 		this.style.backgroundColor = color;
 		this.style.backgroundImage = `${ image }`;
 
-		this.classList.toggle( 'broadcast-cell_disabled', disabled );
+		this.classList.toggle( 'bc-cell_disabled', disabled );
 
 	}
 
 	render() {
 
-		this.className = 'broadcast-cell';
+		this.className = 'bc-cell';
 
 		const rounded: string = Formatted.formatValues( this.getAttribute( 'rounded' ), '6' );
 		const elevation: string = Formatted.formatValues( this.getAttribute( 'elevation' ), '2' );
@@ -58,7 +58,7 @@ export class BroadcastCell extends HTMLElement {
 		this.style.backgroundColor = color;
 		this.style.backgroundImage = `${ image }`;
 
-		this.classList.toggle( 'broadcast-cell_disabled', disabled );
+		this.classList.toggle( 'bc-cell_disabled', disabled );
 
 		this.rendered = true;
 
@@ -114,4 +114,4 @@ export class BroadcastCell extends HTMLElement {
 
 };
 
-customElements.define( 'broadcast-cell', BroadcastCell );
+customElements.define( 'bc-cell', BcCell );

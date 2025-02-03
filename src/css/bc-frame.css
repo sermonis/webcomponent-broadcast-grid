@@ -1,4 +1,4 @@
-.broadcast-overlow {
+.bc-frame {
 
 	position: absolute;
 
@@ -12,11 +12,13 @@
 
 	box-sizing: border-box;
 
-	z-index: 9;
+	z-index: 10;
+
+	transition: opacity .2s;
 
 }
 
-broadcast-overflow:not(:defined) {
+bc-frame:not(:defined) {
 
 	display: none;
 

@@ -1,13 +1,22 @@
-import './css/broadcast-video.css';
+import './css/bc-video.css';
 import { Formatted } from './utils/formatted.ts';
+// import { 
+	
+// 	type TMediaSource,
 
-export class BroadcastVideo extends HTMLElement {
+// } from './@types/intex.types';
+import { PropObserver } from './utils/prop-observer.ts';
+
+export class BcVideo extends HTMLElement {
 
 	private rendered: boolean = false;
+	public srcObject: PropObserver;
 
 	constructor() {
 
 		super();
+
+		this.srcObject = new PropObserver();
 
 	}
 
@@ -20,7 +29,7 @@ export class BroadcastVideo extends HTMLElement {
 		const controls: boolean = Formatted.formatBooleanAttribute( this.getAttribute( 'constrols' ), false );
 		const autoplay: boolean = Formatted.formatBooleanAttribute( this.getAttribute( 'autoplay' ), false );
 
-		const video = this.querySelector<HTMLElement>( '.broadcast-video__video' );
+		const video = this.querySelector<HTMLVideoElement>( '.bc-video__video' );
 
 		if ( video ) {
 
@@ -38,7 +47,7 @@ export class BroadcastVideo extends HTMLElement {
 
 	render() {
 
-		this.className = 'broadcast-video';
+		this.className = 'bc-video';
 
 		const muted: boolean = Formatted.formatBooleanAttribute( this.getAttribute( 'muted' ), false );
 		const loop: boolean = Formatted.formatBooleanAttribute( this.getAttribute( 'loop' ), false );
@@ -51,7 +60,7 @@ export class BroadcastVideo extends HTMLElement {
 		
 			<video
 			
-				class="broadcast-video__video"
+				class="bc-video__video"
 				src="${ src }"
 				posted="${ posted }"
 				${ loop ? 'loop': '' }
@@ -66,6 +75,20 @@ export class BroadcastVideo extends HTMLElement {
 		`;
 
 		this.rendered = true;
+
+		this.srcObject.subscribe( () => {
+
+			const video = this.querySelector<HTMLVideoElement>( '.bc-video__video' );
+
+			if ( !!video ) {
+
+				video.srcObject = this.srcObject.value;
+
+				video.play();
+
+			}
+
+		} );
 
 	}
 
@@ -106,4 +129,4 @@ export class BroadcastVideo extends HTMLElement {
 
 };
 
-customElements.define( 'broadcast-video', BroadcastVideo );
+customElements.define( 'bc-video', BcVideo );
