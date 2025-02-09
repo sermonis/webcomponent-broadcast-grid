@@ -1,48 +1,57 @@
-import { Formatted } from './formatted';
+import { type ITransformation } from '../@types/transform.types';
 
-interface ICoords {
+interface ITransformMethod {
 
-	x?: string | number;
-	y?: string | number;
+	[ key: string ]: Function;
 
 };
 
-interface ISize {
+const methods: ITransformMethod = {
 
-	w?: string | number;
-	h?: string | number;
+	'rotate': ( angle: number ) => `rotate(${ angle }deg)`,
+	'translate': ( coords: { x: number, y: number } ) => `translate(${ coords.x }px, ${ coords.y }px)`,
+	'translate-x': ( x: number ) => `translateX(${ x }px)`,
+	'translate-y': ( y: number ) => `translateY(${ y }px)`,
+	'scale': ( size: { a: number, b?: number } ) => `scale(${ size.a } ${ size.b !== undefined ? `, ${ size.b }` : '' })`,
+	'scaleX': ( size: number ) => `scaleX(${ size })`,
+	'scaleY': ( size: number ) => `scaleY(${ size })`,
+	'skew': ( angle: { angleX: number, angleY: number } ) => `skew(${ angle.angleX }deg, ${ angle.angleY }deg )`,
+	'skewX': ( angle: number ) => `skewX(${ angle }deg )`,
+	'skewY': ( angle: number ) => `skewY(${ angle }deg )`,
 
 };
 
 export class Transform {
 
-	static moveTo( el: HTMLElement, coords: ICoords ): void {
+	static launch( el: HTMLElement, transformations: Array<ITransformation> ): void {
 
-		if ( !( el instanceof HTMLElement ) ) throw new Error( 'Transform -> moveTo :: invalid HTML Element' );
+		if ( !( el instanceof HTMLElement ) ) {
+			
+			throw new Error( 'Transform -> launch :: invalid HTML Element' );
 
-		const x: string | number = coords?.x !== undefined ? coords.x : 'auto';
-		const y: string | number = coords?.y !== undefined ? coords.y : 'auto';
+		}
 
-		const posX: string = Formatted.formatValues( x, 'auto' );
-		const posY: string = Formatted.formatValues( y, 'auto' );
+		if ( !( transformations instanceof Array ) ) {
+			
+			throw new Error( 'Transform -> launch :: invalid transformations type. Expected "Array"' );
 
-		el.style.left = posX;
-		el.style.top = posY;
+		}
 
-	}
+		const transforms: string = transformations.reduce( ( prev: Array<string>, curr: ITransformation ): Array<string> => {
 
-	static scale( el: HTMLElement, sizes: ISize ): void {
+			if ( !curr.type || !methods[ curr.type ] ) {
+				
+				throw new Error( 'Transform -> launch :: invalid method type' );
 
-		if ( !( el instanceof HTMLElement ) ) throw new Error( 'Transform -> moveTo :: invalid HTML Element' );
+			}
 
-		const w: string | number = sizes?.w !== undefined ? sizes.w : 'auto';
-		const h: string | number = sizes?.h !== undefined ? sizes.h : 'auto';
+			prev.push( methods[ curr.type ]( curr.value ) );
 
-		const width: string = Formatted.formatValues( w, 'auto' );
-		const height: string = Formatted.formatValues( h, 'auto' );
+			return prev;
 
-		el.style.width = width;
-		el.style.height = height;
+		}, [] ).join( ' ' );
+
+		el.style.transform = transforms;
 
 	}
 

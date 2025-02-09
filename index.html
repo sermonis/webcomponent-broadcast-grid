@@ -22,7 +22,7 @@
     <!-- <script type="module" src="/src/index.ts"></script> -->
 
 	<script type="module">
-		import { BcGrid, BcCell, BcVideo } from './src/index.ts';
+		import { BcGrid, BcCell, BcVideo, BcAudio } from './src/index.ts';
 
 		document.addEventListener( 'DOMContentLoaded', () => {
 
@@ -44,11 +44,27 @@
 
 	<div id="app" style="position: relative; height: 100vh">
 
-		<button onclick="playOrStop()" style="position: fixed; left: 10px; top: 10px; z-index: 1000">
+		<div style="display: flex; gap: 2px; position: fixed; left: 10px; top: 10px; z-index: 1000; border: 2px solid red;">
 
-			Play
+			<button onclick="addCell()">
 
-		</button>
+				Add
+
+			</button>
+
+			<button onclick="playOrStop()">
+
+				Play video
+
+			</button>
+
+			<button onclick="playOrStopAudio()">
+
+				Play audio
+
+			</button>
+
+		</div>
 
 		<bc-grid id="grid">
 		
@@ -74,6 +90,8 @@
 				</bc-layer>
 
 				<bc-video id="video"></bc-video>
+
+				<bc-audio id="audio"></bc-audio>
 			
 			</bc-cell>
 		
@@ -101,6 +119,7 @@
 		let gap = 4;
 
 		let play = false;
+		let playAudio = false;
 
 		let mediaStream = null;
 
@@ -144,21 +163,61 @@
 
 		}
 
+		function playOrStopAudio () {
+
+			playAudio = !playAudio;
+
+			if ( playAudio ) {
+
+				navigator.mediaDevices.getUserMedia({ video: false, audio: true })
+					.then(function(stream) {
+
+						mediaStream = stream;
+
+						const audio = document.getElementById( 'audio' );
+
+						audio.srcObject.value = stream;
+
+					})
+					.catch(function(err) {
+						console.log("An error occurred: " + err);
+					});
+
+			} else {
+
+				const audio = document.getElementById( 'audio' );
+
+				audio.srcObject.value = null;
+
+				if (mediaStream) {
+					mediaStream.getTracks().forEach((track) => {
+					track.stop();
+
+					
+
+					});
+					mediaStream = null;
+				}
+
+			}
+
+		}
+
 		function addCell () {
 
-			const cell = document.createElement( 'broadcast-cell' );
+			const cell = document.createElement( 'bc-cell' );
 
 			const grid = document.getElementById( 'grid' );
 
 			grid.appendChild( cell );
 
-			const frame = document.createElement( 'broadcast-frame' );
+			const frame = document.createElement( 'bc-frame' );
 			
 			cell.appendChild( frame );
 
-			const layer = document.createElement( 'broadcast-layer' );
+			const layer = document.createElement( 'bc-layer' );
 
-			const video = document.createElement( 'broadcast-video' );
+			const video = document.createElement( 'bc-video' );
 
 			video.setAttribute( 'src', '/video.mp4' );
 			video.setAttribute( 'autoplay', 'true' );

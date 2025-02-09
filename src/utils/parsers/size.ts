@@ -1,4 +1,4 @@
-interface ISize {
+export interface ISize {
 
 	value: number;
 	unit: string;

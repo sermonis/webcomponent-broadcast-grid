@@ -1,12 +1,19 @@
 import './css/bc-grid.css';
 import { Formatted } from './utils/formatted.ts';
-import { Transform } from './utils/transform.ts';
+import { Position } from './utils/position.ts';
 import { type IAspectRatio } from './utils/parsers/aspect-ratio.ts';
+import { BcCell } from './bc-cell.ts';
 
 interface IBcGrid {
 
 	gap?: number;
 	aspectRatio?: IAspectRatio;
+
+	/**
+	 * hooks
+	 */
+
+	onGridRecount?: Function;
 
 };
 
@@ -25,6 +32,54 @@ export class BcGrid extends HTMLElement implements IBcGrid {
 		this.aspectRatio = { w: 16, h: 9 };
 
 	}
+
+	/**
+	 * Query selectors methods
+	 */
+
+	/**
+	 *  @param { string } number
+	 */
+	public getCellByNum( n: number ): BcCell | null | undefined {
+
+		return this.shadowRoot?.querySelector( `.bc-cell:nth-child( ${ n } )` );
+
+	}
+
+	/**
+	 *  @param { string } id
+	 */
+	public getCellById( id: string ): BcCell | null | undefined {
+
+		return this.shadowRoot?.getElementById( `${ id }` ) as BcCell;
+
+	}
+
+	/**
+	 *  @param { string } name
+	 */
+	public getCellByUserName( name: string ): Array<BcCell> {
+
+		const cells: NodeList | undefined = this.shadowRoot?.querySelectorAll( `.bc-cell[ name="${ name }" ]` );
+
+		if ( cells ) {
+
+			return Array.from( cells ) as Array<BcCell>
+
+		}
+
+		return [];
+
+	}
+
+	/**
+	 * hooks
+	 */
+
+	/**
+	 * fires if grid was recount
+	 */
+	onGridRecount: Function = () => {};
 
 	private gapTotalSize( n: number ): number {
 
@@ -64,8 +119,8 @@ export class BcGrid extends HTMLElement implements IBcGrid {
 		const posX = centerX - rowCenter + x * w + this.gapTotalSize( x + 1 );
 
 		// трансформация ячеек
-		Transform.moveTo( el, { x: posX, y: posY } );
-		Transform.scale( el, { w, h } );
+		Position.moveTo( el, { x: posX, y: posY } );
+		Position.scale( el, { w, h } );
 
 	}
 
@@ -117,6 +172,25 @@ export class BcGrid extends HTMLElement implements IBcGrid {
 			}
 
 		}
+
+		// тест события
+		const event = new CustomEvent( 'recount', {
+
+			bubbles: true,
+			composed: true,
+			detail: "composed"
+
+		} );
+
+		this.dispatchEvent( event );
+
+		this.onGridRecount( {
+
+			width: gw,
+			height: gh,
+			cells: cells.length,
+
+		} );
 
 	}
 

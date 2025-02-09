@@ -5,3 +5,4 @@ export * from './bc-frame.ts';
 export * from './bc-grid.ts';
 export * from './bc-avatar.ts';
 export * from './bc-video.ts';
+export * from './bc-audio.ts';
