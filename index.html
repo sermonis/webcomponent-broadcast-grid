@@ -24,6 +24,9 @@
 	<script type="module">
 		import { BcGrid, BcCell, BcVideo, BcAudio } from './src/index.ts';
 
+		import { Styling } from './src/utils/styling';
+		import { Filter } from './src/utils/filter';
+
 		document.addEventListener( 'DOMContentLoaded', () => {
 
 			navigator.mediaDevices.getUserMedia({ video: true, audio: false })
@@ -37,6 +40,23 @@
 				.catch(function(err) {
 					console.log("An error occurred: " + err);
 				});
+
+			Styling.launch( document.getElementById( 'image' ), {
+
+				'outline': '10px solid red',
+
+			} );
+
+			Filter.launch( document.getElementById( 'image' ), [
+
+				{
+
+					type: 'opacity',
+					value: 1
+
+				},
+
+			] );
 
 		} );
 
@@ -66,7 +86,13 @@
 
 		</div>
 
-		<bc-grid id="grid">
+		<img
+		
+			style="position: absolute; left: 100px; top: 100px; width: 300px;"
+			id="image"
+			src="https://img.goodfon.ru/wallpaper/nbig/4/ee/noch-fantastika-luna-devushka.webp" />
+
+		<bc-grid id="grid" style="display: none;">
 		
 			<bc-cell>
 			

@@ -1,16 +1,23 @@
-import { type IOptions } from '../@types/options.types';
-
 export class Styling {
 
-    static run( el: HTMLElement, styles: IOptions ): void {
+    static launch( el: HTMLElement, styles: CSSStyleDeclaration ): void {
 
 		if ( !( el instanceof HTMLElement ) ) {
 			
-			throw new Error( 'Transform -> launch :: invalid HTML Element' );
+			throw new Error( 'Styling -> launch :: invalid HTML Element' );
 
 		}
 
-        Object.assign( el.style, window.getComputedStyle( el ), styles );
+        // Устанавливаем новые стили напрямую
+        for ( const property of Object.keys( styles ) ) {
+
+            if ( property in el.style ) {
+
+                ( el.style as any )[ property ] = styles[ property as any ];
+
+            }
+
+        }
 
     }
 
