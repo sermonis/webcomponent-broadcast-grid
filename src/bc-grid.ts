@@ -81,6 +81,16 @@ export class BcGrid extends HTMLElement implements IBcGrid {
 	 */
 	onGridRecount: Function = () => {};
 
+	/**
+	 * fires if cell was appended
+	 */
+	onCellAppend: Function = () => {};
+
+	/**
+	 * fires if cell was removed
+	 */
+	onCellRemoved: Function = () => {};
+
 	private gapTotalSize( n: number ): number {
 
 		return ( n - 1 ) * this.gap;
