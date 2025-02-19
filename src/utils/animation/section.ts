@@ -1,8 +1,7 @@
-import { IStateOptions } from '../../@types/animation.types';
+import { ISectionOptions } from '../../@types/animation.types';
 
-interface IAnimationState {
+interface IAnimationSection {
 
-	el: HTMLElement;
 	callback: Function;
 
 	offset: number;
@@ -10,9 +9,10 @@ interface IAnimationState {
 
 };
 
-export class AnimationState implements IAnimationState {
+// type TAnimationFuction = ( : number ) => boolean;
 
-	el!: HTMLElement;
+export class AnimationSection implements IAnimationSection {
+
 	callback!: Function;
 
 	offset!: number;
@@ -20,28 +20,19 @@ export class AnimationState implements IAnimationState {
 
 	constructor(
 		
-		el: HTMLElement,
 		callback: Function,
-		options: IStateOptions,
+		options: ISectionOptions,
 	
 	) {
 
 		try {
-
-			if ( !( el instanceof HTMLElement ) ) {
-
-				throw new Error( 'State -> constructor :: invalid element' );
-
-			}
 
 			if ( !( callback instanceof Function ) ) {
 
 				throw new Error( 'State -> constructor :: invalid callback. Expected "Function"' );
 
 			}
-
-			this.el = el;
-
+			
 			this.callback = callback;
 
 			/**
