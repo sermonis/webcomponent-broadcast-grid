@@ -26,6 +26,12 @@
 
 		import { Styling } from './src/utils/styling';
 		import { Filter } from './src/utils/filter';
+		import {
+
+			Animation,
+			AnimationSection
+
+		} from './src/utils/animation';
 
 		document.addEventListener( 'DOMContentLoaded', () => {
 
@@ -41,22 +47,38 @@
 					console.log("An error occurred: " + err);
 				});
 
-			Styling.launch( document.getElementById( 'image' ), {
+			const anim = new Animation();
 
-				'outline': '10px solid red',
+			const animSectionOne = new AnimationSection( ( timing ) => {
+
+				Styling.launch( document.getElementById( 'image' ), {
+
+					'outline': '10px solid red',
+
+				} );
+
+				Filter.launch( document.getElementById( 'image' ), [
+
+					{
+
+						type: 'grayscale',
+						value: 100
+
+					},
+
+				] );
+
+			}, {
+
+				offset: 1000,
+				duration: 2000,
+				timing: 'ease-in'
 
 			} );
 
-			Filter.launch( document.getElementById( 'image' ), [
+			anim.addSection( animSectionOne );
 
-				{
-
-					type: 'opacity',
-					value: 1
-
-				},
-
-			] );
+			console.log( anim );
 
 		} );
 
@@ -88,11 +110,11 @@
 
 		<img
 		
-			style="position: absolute; left: 100px; top: 100px; width: 300px;"
+			style="position: fixed; left: 100px; top: 100px; width: 300px; height: 300px; z-index: 100000;"
 			id="image"
 			src="https://img.goodfon.ru/wallpaper/nbig/4/ee/noch-fantastika-luna-devushka.webp" />
 
-		<bc-grid id="grid">
+		<bc-grid id="grid" style="display: none">
 		
 			<bc-cell>
 			
