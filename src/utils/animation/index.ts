@@ -1,29 +1,30 @@
-import { AnimationState } from './state';
+import { AnimationSection } from './section';
+import { PropObserver } from '../prop-observer';
 
 interface IAnimation {
 
-	timeline?: Set<AnimationState>;
+	timeline?: Set<AnimationSection>;
 
-	totalTime?: number;
+	totalTime?: PropObserver;
 
 };
 
 export class Animation implements IAnimation {
 
-	timeline!: Set<AnimationState>;
+	timeline!: Set<AnimationSection>;
 
-	totalTime!: number;
+	totalTime!: PropObserver;
 
 	constructor() {
 
 		this.timeline = new Set();
-		this.totalTime = 0;
+		this.totalTime = new PropObserver();
 
 	}
 
 	private countTotalTime(): void {
 
-		this.totalTime = [ ...this.timeline ].reduce( ( prev: number, curr: AnimationState ): number => { 
+		this.totalTime = [ ...this.timeline ].reduce( ( prev: number, curr: AnimationSection ): number => { 
 			
 			return Math.max( prev, curr.offset + curr.duration );
 		
@@ -31,15 +32,17 @@ export class Animation implements IAnimation {
 
 	}
 
-	addState( state: AnimationState ): this {
+	addState( section: AnimationSection ): this {
 
-		if ( !( state instanceof AnimationState ) ) {
+		if ( !( section instanceof AnimationSection ) ) {
 
 			throw new Error( 'Animation -> addState :: invalid animation state' );
 
 		}
 
-		this.timeline.add( state );
+		this.timeline.add( section );
+
+		this.totalTime.subscribe( section.animate );
 
 		this.countTotalTime();
 
@@ -47,15 +50,17 @@ export class Animation implements IAnimation {
 
 	}
 
-	removeState( state: AnimationState ): this {
+	removeState( section: AnimationSection ): this {
 
-		if ( !( state instanceof AnimationState ) ) {
+		if ( !( section instanceof AnimationSection ) ) {
 
 			throw new Error( 'Animation -> removeState :: invalid animation state' );
 
 		}
 
-		this.timeline.delete( state );
+		this.timeline.delete( section );
+
+		this.totalTime.unsubscribe( section.animate );
 
 		this.countTotalTime();
 

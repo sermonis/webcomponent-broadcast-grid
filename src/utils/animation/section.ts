@@ -1,4 +1,7 @@
 import { ISectionOptions } from '../../@types/animation.types';
+import { Timing } from './timing';
+
+type TAnimationFuction = ( timing: number ) => void;
 
 interface IAnimationSection {
 
@@ -6,10 +9,11 @@ interface IAnimationSection {
 
 	offset: number;
 	duration: number;
+	timing: Function;
+
+	animate: TAnimationFuction;
 
 };
-
-// type TAnimationFuction = ( : number ) => boolean;
 
 export class AnimationSection implements IAnimationSection {
 
@@ -17,6 +21,7 @@ export class AnimationSection implements IAnimationSection {
 
 	offset!: number;
 	duration!: number;
+	timing!: Function;
 
 	constructor(
 		
@@ -29,7 +34,7 @@ export class AnimationSection implements IAnimationSection {
 
 			if ( !( callback instanceof Function ) ) {
 
-				throw new Error( 'State -> constructor :: invalid callback. Expected "Function"' );
+				throw new Error( 'Section -> constructor :: invalid callback. Expected "Function"' );
 
 			}
 			
@@ -40,12 +45,33 @@ export class AnimationSection implements IAnimationSection {
 			 */
 			this.offset = options?.offset || 0;
 			this.duration = options?.duration || 0;
+			this.timing = Timing.getTiming( options?.timing || 'linear' );
 
 		} catch ( e: unknown ) {
 
 			console.error( e );
 
 		}
+
+	}
+
+	private progress( timing: number ): number | null {
+
+		if ( timing >= this.offset && timing <= ( this.offset + this.duration ) ) {
+
+			return timing - this.offset;
+
+		}
+
+		return null;
+	
+	}
+
+	public animate( timing: number ): void {
+
+		const progress: number | null = this.progress( timing );
+
+		progress !== null && this.callback( timing );
 
 	}
 
