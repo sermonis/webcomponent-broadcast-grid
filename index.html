@@ -26,6 +26,7 @@
 
 		import { Styling } from './src/utils/styling';
 		import { Filter } from './src/utils/filter';
+		import { Transform } from './src/utils/transform';
 		import {
 
 			Animation,
@@ -49,34 +50,53 @@
 
 			const anim = new Animation();
 
-			const animSectionOne = new AnimationSection( ( timing ) => {
+			const animSectionOne = new AnimationSection( ( { timing, progress } ) => {
 
-				Styling.launch( document.getElementById( 'image' ), {
-
-					'outline': '10px solid red',
-
-				} );
-
-				Filter.launch( document.getElementById( 'image' ), [
+				Transform.launch( document.getElementById( 'image' ), [
 
 					{
 
-						type: 'grayscale',
-						value: 100
+						type: 'scale',
+						value: { a: progress, b: progress }
 
-					},
+					}
 
 				] );
 
 			}, {
 
-				offset: 1000,
-				duration: 2000,
+				offset: 0,
+				duration: 1000,
 				timing: 'ease-in'
 
 			} );
 
-			anim.addSection( animSectionOne );
+			const animSectionTwo = new AnimationSection( ( { timing, progress } ) => {
+
+				Transform.launch( document.getElementById( 'image' ), [
+
+					{
+
+						type: 'rotate',
+						value: 360 * progress
+
+					}
+
+				] );
+
+			}, {
+
+				offset: 2000,
+				duration: 2000,
+				timing: 'ease-in-out'
+
+			} );
+
+			anim
+				.addSection( animSectionOne )
+				.addSection( animSectionTwo );
+
+			anim.play();
 
 			console.log( anim );
 

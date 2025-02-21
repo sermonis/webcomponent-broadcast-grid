@@ -55,7 +55,7 @@ export class AnimationSection implements IAnimationSection {
 
 	}
 
-	private progress( timing: number ): number | null {
+	private sectionTime( timing: number ): number | null {
 
 		if ( timing >= this.offset && timing <= ( this.offset + this.duration ) ) {
 
@@ -69,9 +69,27 @@ export class AnimationSection implements IAnimationSection {
 
 	public animate( timing: number ): void {
 
-		const progress: number | null = this.progress( timing );
+		const sectionTime: number | null = this.sectionTime( timing );
 
-		progress !== null && this.callback( timing );
+		if ( sectionTime !== null ) {
+
+			const progress = sectionTime / this.duration;
+
+			this.callback( {
+						
+				timing,
+				progress,
+					
+			} );
+
+		}
+
+		// sectionTime !== null && this.callback( {
+			
+		// 	timing,
+		// 	progress,
+		
+		// } );
 
 	}
 

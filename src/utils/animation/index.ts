@@ -45,7 +45,7 @@ export class Animation implements IAnimation {
 
 		this.timeline.add( section );
 
-		this.currentTime.subscribe( section.animate );
+		this.currentTime.subscribe( () => section.animate( this.currentTime.value ) );
 
 		this.countTotalTime();
 
@@ -63,7 +63,7 @@ export class Animation implements IAnimation {
 
 		this.timeline.delete( section );
 
-		this.currentTime.unsubscribe( section.animate );
+		// this.currentTime.unsubscribe( section.animate );
 
 		this.countTotalTime();
 
